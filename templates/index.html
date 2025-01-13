@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle Financeiro</title>
+    
+</head>
+<body>
+    <h1>Controle Financeiro</h1>
+
+    <!-- Despesas Fixas -->
+    <h2>Despesas Fixas</h2>
+    <form action="/add/despesas_fixas" method="post">
+        <input type="text" name="item" placeholder="Descrição">
+        <input type="number" name="valor" step="0.01" placeholder="Valor">
+        <button type="submit">Adicionar</button>
+    </form>
+    <ul>
+        {% for item in data.despesas_fixas %}
+        <li>{{ item.item }}: R$ {{ item.valor }}</li>
+        {% endfor %}
+              
+        <p>Total de Despesas: R$ {{ total_despesas }}</p>
+        <p>Média Mensal: R$ {{ media_despesas_mensal }}</p>
+        <p>Média Anual: R$ {{ media_despesas_anual }}</p>
+    </ul>
+
+    <!-- Investimentos -->
+    <h2>Investimentos</h2>
+    <form action="/add/investimentos" method="post">
+        <input type="text" name="item" placeholder="Descrição">
+        <input type="number" name="valor" step="0.01" placeholder="Valor">
+        <button type="submit">Adicionar</button>
+    </form>
+    <ul>
+        {% for item in data.investimentos %}
+        <li>{{ item.item }}: R$ {{ item.valor }}</li>
+        {% endfor %}
+    </ul>
+    <form action="/statusinvest/<STOCK>" method="get">
+        <input type="text" name="stock" placeholder="Ticket de ação">
+        <button type="submit">Ver Status Invest</button>
+    </form>
+
+    <!-- Fontes de Renda -->
+    <h2>Fontes de Renda</h2>
+    <form action="/add/fontes_renda" method="post">
+        <input type="text" name="item" placeholder="Descrição">
+        <input type="number" name="valor" step="0.01" placeholder="Valor">
+        <button type="submit">Adicionar</button>
+    </form>
+    <ul>
+        {% for item in data.fontes_renda %}
+        <li>{{ item.item }}: R$ {{ item.valor }}</li>
+        {% endfor %}
+
+        <p>Total de Receitas: R$ {{ total_receitas }}</p>
+        <p>Média Mensal: R$ {{ media_ganhos_mensal }}</p>
+        <p>Média Anual: R$ {{ media_ganhos_anual }}</p>
+    </ul>
+
+    <table>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+        </tr>
+        {% for item in data.categoria %}
+        <tr>
+            <td>{{ item.item }}</td>
+            <td>R$ {{ item.valor }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
